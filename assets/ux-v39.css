@@ -1,0 +1,55 @@
+/* USEFUL Acquisition Planner v3.9: restrained quick planning, panel toggles and text-only orbit directions. */
+.sr-only-v39{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.quick-planner-v39{margin:13px 0 8px;padding:13px 15px;border:1px solid #31566b;border-radius:12px;background:#10283a;display:flex;flex-direction:column;gap:8px}
+.quick-planner-heading{display:flex;align-items:baseline;flex-wrap:wrap;gap:8px 14px;color:#d5e8ef}
+.quick-planner-heading strong{font-size:12px;color:#72dfce;letter-spacing:.02em}
+.quick-planner-heading span{font-size:11px;color:#9db5c6}
+.quick-planner-row{display:grid;grid-template-columns:minmax(160px,1fr) auto auto;gap:8px;align-items:center}
+.quick-planner-row input{width:100%;min-width:0;min-height:41px;border:1px solid #416278;border-radius:8px;background:#081c2d;color:#e4f5f7;padding:9px 12px;font-size:12px}
+.quick-planner-row .button{min-height:41px;font-size:11px}
+.quick-planner-message{font-size:10px;color:#9bb3c4;line-height:1.5;overflow-wrap:anywhere}
+.quick-planner-message[data-level="error"]{color:#ffc99f}
+.focus-actions{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px}
+.focus-actions .focus-add-v39{white-space:nowrap}
+.v39-collapse-btn{margin-left:auto;flex:0 0 auto;border:1px solid #3e5e72;border-radius:8px;width:32px;height:32px;display:grid;place-items:center;background:#183449;color:#c8e6ee;font-size:23px;line-height:1;font-weight:500;cursor:pointer}
+.v39-collapse-btn:hover{border-color:#67cdbf;color:#effffb;background:#245063}
+.v39-collapse-btn:focus-visible{outline:2px solid #6ce5d3;outline-offset:2px}
+.panel.v39-is-collapsed{overflow:visible}
+.panel.v39-is-collapsed> :not(.panel-head){display:none!important}
+.panel.v39-is-collapsed>.panel-head{padding-bottom:16px}
+/* Preserve the meaning via icons/text. No competing boxes for direction/status. */
+.orbit-tag, .cal-pass-dir, #dailyEntries .cal-pass-dir, #results .orbit-tag{
+ background:transparent!important;border:0!important;border-radius:0!important;
+ min-height:0!important;padding:0 2px 0 8px!important;box-shadow:none!important;
+ font-weight:800!important;font-size:10px!important;letter-spacing:.025em;display:inline-flex;align-items:center;
+ border-left:2px solid currentColor!important;white-space:nowrap
+}
+.orbit-tag.is-asc,.cal-pass-dir.is-asc{color:#d1b5ff!important}
+.orbit-tag.is-desc,.cal-pass-dir.is-desc{color:#76e5b9!important}
+#dailyEntries .cal-pass-row .op-right{gap:7px}
+#dailyEntries .cal-pass-row .cal-pass-dir{font-size:10px!important}
+.pass-site-meta{gap:8px 12px}
+.daily-direction-filters{background:transparent;border:1px solid #3b5164;border-radius:9px}
+.daily-direction-button{background:transparent!important;border-radius:0!important;border-bottom:2px solid transparent!important;box-shadow:none!important}
+.daily-direction-button.is-active{color:#e6f3f6!important;border-bottom-color:#5fd9c9!important}
+.daily-direction-button[data-daily-direction="ASCENDING"].is-active{color:#d1b5ff!important;border-bottom-color:#d1b5ff!important}
+.daily-direction-button[data-daily-direction="DESCENDING"].is-active{color:#76e5b9!important;border-bottom-color:#76e5b9!important}
+.field-sheet-v39{margin:0 18px 14px;border:1px solid #37566a;border-radius:9px;background:#11283a}
+.field-sheet-v39>summary{padding:12px 15px;cursor:pointer;color:#c8e1eb;font-size:11px;font-weight:700}
+.field-sheet-body{padding:3px 16px 10px;display:flex;align-items:end;gap:10px;flex-wrap:wrap}
+.field-sheet-body label{display:flex;flex-direction:column;gap:5px;color:#a6c0cd;font-size:10px}
+.field-sheet-body select{max-width:300px;border:1px solid #416074;background:#0c1f31;color:#e0f2f3;border-radius:7px;padding:9px 11px;font-size:11px}
+.field-sheet-status{min-width:200px;flex:1;font-size:10px;color:#9fbac8;overflow-wrap:anywhere}
+.field-sheet-warning{padding:0 16px 14px;margin:0;color:#9fb5c2;font-size:10px;line-height:1.65}
+@media(max-width:760px){.quick-planner-row{grid-template-columns:1fr 1fr}.quick-planner-row input{grid-column:1/-1}.quick-planner-row .button{width:100%}.quick-planner-v39{padding:12px}.focus-actions .focus-add-v39{flex:1 1 auto}.field-sheet-body label,.field-sheet-body select{width:100%;max-width:none}.field-sheet-body button{width:100%}.v39-collapse-btn{height:34px;width:34px}}
+@media(prefers-reduced-motion:reduce){.quick-planner-v39,.v39-collapse-btn{transition:none!important}}
+
+/* v3.9.2 — a slightly larger, proportional identity mark (desktop + mobile).
+   Satellite selection remains in the existing planner filter, not a duplicate card. */
+.topbar .mobile-brand-image {
+  display:block; width:auto; height:44px; max-width:190px;
+  object-fit:contain; border-radius:8px;
+}
+@media(max-width:700px) {
+  .topbar .mobile-brand-image {height:37px; max-width:140px;}
+}

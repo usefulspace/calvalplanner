@@ -1,0 +1,146 @@
+/* v3.2: all three working views on ONE scrollable page. */
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+#results,#mapping,#calendar,#planningDetails,#settings{scroll-margin-top:93px}
+body[data-ux-view="single"] .ux-pane[hidden]{display:block!important}
+.ux-pane{display:block!important;min-width:0;margin-bottom:18px}
+.ux-main-nav{gap:5px;margin-left:clamp(8px,2vw,35px)}
+.ux-tab{text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.ux-tab:hover,.ux-tab:focus-visible{color:#79f0db;background:#183b44}
+.hero-header{display:flex;align-items:center;justify-content:space-between;gap:22px}
+.ux-planner{margin-bottom:20px}
+.ux-fields{grid-template-columns:1.08fr 1.62fr .83fr .75fr .98fr;gap:11px}
+.ux-field-direction{min-width:138px}
+.ux-primary-actions{margin-top:14px}
+.ux-pane #results,.ux-pane #mapping,.ux-pane #calendar{margin-top:0}
+#uxViewMap{margin-top:0}
+#uxViewCalendar{margin-top:0}
+#uxViewMap #mapping,#uxViewCalendar #calendar{box-shadow:none!important}
+#uxViewResults #results{margin-bottom:0!important}
+body[data-ux-view="single"] .kpi-grid{display:none!important}
+body[data-ux-view="single"] .ux-primary-actions,body[data-ux-view="single"] .ux-caveat,body[data-ux-view="single"] .ux-extra{display:flex}
+.ux-extra{display:block!important}
+.results-panel .panel-head,.calendar-panel .panel-head{border-bottom:1px solid #274054}
+.spacecraft-mini{flex:0 0 auto;display:flex;align-items:center;gap:11px;padding:8px 12px;border:1px solid #2e495b;background:#0f2335;border-radius:12px;max-width:305px;min-height:92px}
+.spacecraft-mini-img{width:104px;height:71px;border-radius:8px;overflow:hidden;background:#858b91;display:flex;align-items:center;justify-content:center;position:relative}
+.spacecraft-mini-img img{width:100%;height:100%;object-fit:contain;display:block}
+.spacecraft-mini-img img[hidden]{display:none}
+.spacecraft-mini-img.is-placeholder:after{content:'✦';color:#52dbc9;font-size:40px}
+.spacecraft-mini-body{display:flex;flex-direction:column;align-items:flex-start;line-height:1.25;gap:5px;min-width:0}
+.spacecraft-mini-eyebrow{font-size:9px;color:#70b5bb;letter-spacing:.1em;font-weight:800;white-space:nowrap}
+.spacecraft-mini-body strong{font-size:13px;line-height:1.2;color:#eff6fa;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.spacecraft-mini-body small{font-size:10px;color:#a9c0cc;line-height:1.4}
+.results-panel #resultsSettingsShortcut{display:none}
+#uxViewResults .result-table-scroll{max-height:430px}
+#uxViewMap #mapStage{height:440px!important;min-height:330px!important}
+#uxViewCalendar .calendar-scroll{max-height:580px}
+#uxViewCalendar .cal-day.cal-count-day{min-height:118px!important}
+#uxViewCalendar .cal-passes b{font-size:22px}
+#uxViewCalendar #planningDetails{margin-top:12px!important}
+#settings[hidden]{display:none!important}
+#settings:not([hidden]){margin-top:24px!important}
+#settings:not([hidden]){display:block}
+.footer{margin-top:25px!important}
+@media(max-width:1200px){.ux-fields{grid-template-columns:repeat(3,minmax(0,1fr))}.ux-field-site{grid-column:span 2}.ux-field-direction{min-width:0}}
+@media(max-width:890px){.ux-fields{grid-template-columns:repeat(2,minmax(0,1fr))}.ux-field-site{grid-column:auto}.spacecraft-mini{max-width:235px}.spacecraft-mini-img{width:75px;height:65px}}
+@media(max-width:700px){
+ html{scroll-padding-top:114px}#results,#mapping,#calendar,#planningDetails,#settings{scroll-margin-top:130px}
+ .hero-header{align-items:flex-start;flex-wrap:wrap;gap:11px}
+ .spacecraft-mini{padding:7px 9px;max-width:none;width:100%;min-height:0;gap:9px}
+ .spacecraft-mini-img{width:85px;height:59px}
+ .spacecraft-mini-body strong{max-width:none}
+ .ux-fields{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .ux-field-site{grid-column:1/-1;grid-row:1}
+ .ux-field-sat{grid-column:1/-1;grid-row:2}
+ .ux-field-direction{grid-column:1/-1}
+ .ux-planner{margin-bottom:14px}
+ .ux-tab{font-size:10.5px!important;padding:8px 4px}
+ .ux-pane{margin-bottom:13px}
+ #uxViewMap #mapStage{height:360px!important;min-height:0!important}
+ #uxViewCalendar .calendar-scroll{max-height:640px}
+ .results-panel .panel-head h2{font-size:17px!important}
+ .cal-site-scope select{width:180px}
+}
+
+/* v3.3 — daily orbit direction control, compact and keyboard accessible */
+.daily-head-controls { display:flex; align-items:center; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+.daily-direction-filters { display:inline-flex; gap:3px; padding:4px; border-radius:12px;
+ background:rgba(7,25,42,.72); border:1px solid rgba(133,171,201,.28); }
+.daily-direction-button { appearance:none; cursor:pointer; border:0; border-radius:8px;
+ background:transparent; color:#a8c4d2; font-family:inherit;
+ font-size:12px; font-weight:700; line-height:1.3; padding:9px 12px; white-space:nowrap;
+ transition:background .16s ease,color .16s ease; }
+.daily-direction-button:hover { background:rgba(67,199,190,.12); color:#e6faf6; }
+.daily-direction-button.is-active { background:#215763; color:#a4ffed;
+ box-shadow:0 0 0 1px rgba(65,216,204,.3) inset; }
+.daily-direction-button:focus-visible { outline:2px solid #69e0cc; outline-offset:2px; }
+@media (max-width: 780px) {
+ #planningDetails .details-panel .panel-head { align-items:flex-start; flex-wrap:wrap; gap:12px; }
+ .daily-head-controls { justify-content:flex-start; width:100%; gap:9px; }
+ .daily-direction-filters { flex:1; max-width:390px; }
+ .daily-direction-button { flex:1; padding:10px 7px; }
+}
+@media (max-width: 430px) {
+ .daily-head-controls { align-items:stretch; flex-direction:column-reverse; }
+ .daily-direction-filters { width:100%; max-width:none; }
+}
+
+/* v3.6 — concise scope and celestial / tracking interface */
+.calendar-scope-label{padding:8px 10px;margin:0 0 8px;border-left:3px solid #4dd4ca;background:#163348;color:#b6f4eb;border-radius:3px;font-size:12px;font-weight:650;}
+.celestial-check{white-space:nowrap;font-size:11px;gap:4px;}.sun-check{color:#f5c873}.moon-check{color:#ccbaff}
+.fleet-map-toolbar{flex-wrap:wrap;row-gap:7px}
+.op-icon.dir-asc{background:#a78bfa!important}.op-icon.dir-desc{background:#43d5aa!important}
+.tracking-export-tools{margin:12px 18px;padding:13px;border:1px solid #335873;border-radius:10px;background:#0d2639;color:#a9cbd5}
+.tracking-export-tools summary{font-size:12px;color:#dbf6f0;font-weight:700;cursor:pointer}
+.tracking-tool-grid{display:flex;flex-wrap:wrap;align-items:end;gap:12px;margin:15px 0 10px}
+.tracking-tool-grid label{display:flex;flex-direction:column;gap:5px;font-size:11px;color:#9cb6c9}
+.tracking-tool-grid select{padding:8px;border-radius:7px;background:#10283b;border:1px solid #43677d;color:#edf5fb}
+#trackingStatus{font-size:11px;color:#75e5d2;margin:9px 0 2px}#trackingStatus[data-level="warn"]{color:#f3c17a}
+.tracking-disclaimer{font-size:10px;color:#8fa7ba;line-height:1.5}
+.fleet-status-pill{display:inline-flex;padding:2px 7px;width:max-content;border-radius:4px;font-size:9px;font-weight:750;letter-spacing:.02em}
+.fleet-available{background:#164e42;color:#8aecc3}.fleet-unavailable{background:#503b25;color:#ffcf96}.fleet-inactive{background:#26384a;color:#b6c3d0}
+.fleet-row-copy small{display:block;color:#8ba8b9;font-size:10px}
+.fleet-image-editor{border:1px solid #325872;padding:12px;border-radius:10px;margin:12px 0;display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.fleet-image-editor label{min-width:200px;flex:1;display:flex;flex-direction:column;gap:4px;font-size:12px;color:#e8f3fa}
+.fleet-image-editor small{font-weight:400;font-size:10px;color:#9ab4c6}
+.fleet-image-preview{width:84px;height:84px;flex:0 0 84px;background:#18364a;border:1px solid #486a7d;border-radius:9px;display:grid;place-items:center}
+.fleet-image-preview img{max-width:80px;max-height:80px;object-fit:contain}
+.fleet-image-editor input{max-width:100%;font-size:11px;color:#accde0}
+@media(max-width:750px){.tracking-export-tools{margin:9px}.tracking-tool-grid>*{flex:1}.celestial-check{font-size:10px}}
+
+.sky-projection-hint{font-size:9px;color:#829fae;white-space:normal;}
+
+.calendar-scope-heading{padding:9px 15px;margin:0;border-top:1px solid #213c53;background:#112f42;color:#b1efe2;font-size:12px;font-weight:700}
+.cal-single-site{display:block;color:#b9ddeb;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+
+/* v3.7: compact category filters, well-spaced scrollbars, and pass direction colors */
+.cal-type-filterbar{background:#0c2233;border:1px solid #2e4c60;border-radius:11px;padding:10px 14px;margin:10px 0 14px}
+.cal-type-header{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px;font-size:11px;color:#d6e7ec}.cal-type-header strong{font-size:12px;color:#f2fbfe}.cal-type-header>span{color:#8cbdc6}
+.cal-type-header button{margin-left:auto;border:1px solid #365d72;background:#153345;color:#a9e9e1;padding:5px 11px;border-radius:7px;font-size:11px;cursor:pointer}
+.cal-type-options{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.cal-type-option{display:inline-flex;gap:6px;align-items:center;padding:5px 9px;border:1px solid #3c5265;border-radius:20px;background:#152e40;color:#a9c0cc;white-space:nowrap;cursor:pointer;font-size:10.5px}
+.cal-type-option:has(input:checked){background:#173e4c;color:#e5fbfa;border-color:var(--site-color,#55b6c6)}
+.cal-type-option input{width:13px;height:13px;margin:0;accent-color:var(--site-color,#43d3c1)}
+.cal-type-dot{width:7px;height:7px;border-radius:50%;background:var(--site-color,#53cdbd)}
+.cal-type-chips{display:flex;gap:3px 6px;flex-wrap:wrap;margin-top:3px;max-height:35px;overflow:hidden;line-height:1.2}
+.cal-type-chip{font-size:8px;font-weight:650;color:#b9ceda;white-space:nowrap;letter-spacing:0;padding:1px 3px;border-left:2px solid var(--site-color,#6ac);background:#213344;border-radius:2px}
+.cal-day.cal-count-day .cal-passes{margin-top:auto}.cal-day.cal-count-day .cal-passes b{font-size:21px}
+.opportunity-list{scrollbar-gutter:stable;padding-right:16px}
+.opportunity-list .op-entry{margin-right:5px;padding-right:17px}
+.opportunity-list .op-right{min-width:104px;flex:0 0 auto;padding-right:6px}
+.opportunity-list .op-content{min-width:0}
+.result-table-scroll{scrollbar-gutter:stable;padding-right:13px}
+.pass-direction-inline.dir-asc{color:#c6adff}.pass-direction-inline.dir-desc{color:#78ebc8}
+.op-icon.dir-asc{background:#b191ff!important}.op-icon.dir-desc{background:#43d3a7!important}
+.capture-geometry{margin:12px 16px;border-radius:11px;border:1px solid #326073;padding:12px 14px;background:#11283c}
+.capture-geometry summary{cursor:pointer;color:#bff2e8;font-size:13px;font-weight:800}
+.capture-info{font-size:11px;color:#adc4d6;margin:9px 0 12px}
+.capture-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.capture-controls label{font-size:11px;color:#a9c6d1;display:flex;flex-direction:column;gap:5px}
+.capture-controls input,.capture-controls select{width:100%;min-width:0;border:1px solid #41667e;border-radius:7px;background:#0c2033;color:#e6f4fa;padding:9px}
+.capture-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:13px}
+#captureStatus{font-size:11px;color:#b4c6d6}#captureStatus[data-level=warn]{color:#f4b778}
+.capture-caveat{margin:10px 0 0;font-size:10px;color:#839fb3}
+@media(max-width:760px){.capture-controls{grid-template-columns:1fr}.opportunity-list .op-right{min-width:86px}.cal-type-header button{margin-left:0}}
+
+.tracking-tool-grid > .capture-geometry {order:3;flex:1 1 100%;min-width:0;margin:8px 0 2px;}
+.pass-type-inline{display:block;font-size:9px;font-weight:700;margin-top:2px;}

@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "description": "Editable Cal/Val site categories and marker colors",
+  "types": [
+    {"name": "Radiometric", "color": "#38dfc9"},
+    {"name": "Geometric", "color": "#75b7ff"},
+    {"name": "Spatial / MTF", "color": "#ae93ff"},
+    {"name": "Atmospheric", "color": "#f2c66e"},
+    {"name": "DSNU / Dark", "color": "#e58ae4"},
+    {"name": "Other", "color": "#a1b4c4"}
+  ]
+}
